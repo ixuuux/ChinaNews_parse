@@ -6,5 +6,8 @@
 
 跑出来的结果图片:
 
+人民日报
 ![人民日报](http://ww1.sinaimg.cn/large/005WOYz1ly1ftmce6eesxj30uk0i2jwi.jpg)
+
+新华日报
 ![新华日报](http://ww1.sinaimg.cn/large/005WOYz1ly1ftmcek1nv0j30uk0i2ae5.jpg)

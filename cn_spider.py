@@ -3,28 +3,36 @@ import time
 import jieba
 import requests
 from lxml import etree
-import multiprocessing as mp
+import threading as td
 from wordcloud import WordCloud
 
+max_req = 3  # 最大重试次数
 
 class GetHtml(object):  # 专职发送请求
+    
+    num = 0
+    
     def get_one_page(self, url, headers, timeout=3):
-        try:
-            response = requests.get(url=url, headers=headers, timeout=timeout)
-            if response.status_code == 200:
-                return response
-            return None
-        except TimeoutError:
-            print("Time Out", url)
-            time.sleep(1)
-            return self.get_one_page(url=url, headers=headers, timeout=timeout + 3)
-        except Exception as e:
-            print(e, url)
-            time.sleep(1)
-            return self.get_one_page(url=url, headers=headers, timeout=timeout + 3)
+        if self.num < max_req:
+            try:
+                response = requests.get(url=url, headers=headers, timeout=timeout)
+                if response.status_code == 200:
+                    self.num = 0
+                    return response
+            except TimeoutError:
+                print("Time Out", url)
+                self.num += 1
+                time.sleep(self.num+1)
+                return self.get_one_page(url=url, headers=headers, timeout=timeout + 3)
+            except Exception as e:
+                print(e, url)
+                self.num += 1
+                time.sleep(self.num+1)
+                return self.get_one_page(url=url, headers=headers, timeout=timeout + 3)
 
 
 class WordClouds(object):  # 做词云图
+    
     def wordc(self, file_name, font_path="msyh.ttc"):
         with open("{}.txt".format(file_name), encoding="utf-8") as f:
             seg_list = jieba.cut(f.read(), cut_all=False)  # 使用jieba分词
@@ -44,6 +52,7 @@ class WordClouds(object):  # 做词云图
 
 
 class RenminRibao(GetHtml, WordClouds):  # 人民日报
+    
     def __init__(self):
         self.url = "http://paper.people.com.cn/rmrb/html/{}/nbs.D110000renmrb_01.htm".format(time.strftime("%Y-%m/%d"))
         self.headers = {
@@ -91,6 +100,7 @@ class RenminRibao(GetHtml, WordClouds):  # 人民日报
 
 
 class XinhuaRibao(GetHtml, WordClouds):  # 新华日报
+    
     def __init__(self):
         # http://xh.xhby.net/mp3/pc/layout/201807/25/l1.html
         # self.url = "http://paper.people.com.cn/rmrb/html/{}/nbs.D110000renmrb_01.htm".format(time.strftime("%Y-%m/%d"))
@@ -137,6 +147,7 @@ class XinhuaRibao(GetHtml, WordClouds):  # 新华日报
 
 
 class ChinaDaily(GetHtml, WordClouds):  # 中国日报，海外
+    
     def __init__(self):
         self.url = "http://www.chinadaily.com.cn/china/governmentandpolicy"
         self.headers = {
@@ -180,16 +191,68 @@ class ChinaDaily(GetHtml, WordClouds):  # 中国日报，海外
         print("中国日报完成，用时：", e-s)
 
 
+class GMDaily(GetHtml, WordClouds):  # 光明日报
+    
+    def __init__(self):
+        self.url = "http://www.gmw.cn/"
+        self.headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                          "Chrome/67.0.3396.62 Safari/537.36"
+        }
+        self.timeout = 5
+        self.name = "光明日报"
+
+    def get_html(self):
+        return self.get_one_page(url=self.url, headers=self.headers, timeout=self.timeout).content.decode()
+
+    def parse(self, html):  # 提取每篇新闻的url，交由get_doc方法处理
+        try:
+            ele = etree.HTML(html)
+            blo = ele.xpath('//div[contains(@class, "focusAreaM")]')
+            for i in blo:
+                lists = i.xpath('.//a[@target="_blank"]/@href')
+                for ii in lists:
+                    if ii[:4] == "http":
+                        yield ii
+        except IndexError as e:
+            print("光明日报", e)
+
+    def get_doc(self, url):  # 获取新闻正文
+        html = self.get_one_page(url, headers=self.headers)
+        if html:
+            ele = etree.HTML(html.content.decode())
+            for i in ele.xpath('//div[@id="contentMain"]'):
+                yield ''.join(i.xpath('.//p//text()'))
+
+    def save(self, info):
+        with open("{}.txt".format(self.name), "a", encoding="utf-8") as f:
+            f.write(info)
+            f.write("\n")
+
+    def run(self):
+        s = time.time()
+        html = self.get_html()
+        for url in self.parse(html):
+            for info in self.get_doc(url):
+                # print(info)
+                self.save(info)
+        self.wordc(self.name)
+        e = time.time()
+        print("光明日报完成，用时：", e-s)
+
+
 if __name__ == '__main__':
     s = time.time()
     renminribao = RenminRibao()
     xinhuaribao = XinhuaRibao()
     chinadaily = ChinaDaily()
-    p1 = mp.Process(target=renminribao.run)
-    p2 = mp.Process(target=xinhuaribao.run)
-    p3 = mp.Process(target=chinadaily.run)
-    p1.start()
-    p2.start()
-    p3.start()
+    t1 = td.Thread(target=renminribao.run)
+    t2 = td.Thread(target=xinhuaribao.run)
+    t3 = td.Thread(target=chinadaily.run)
+    t4 = td.Thread(target=gmdaily.run)
+    t1.start()
+    t2.start()
+    t3.start()
+    t4.start()
     e = time.time()
     print("用时：", e-s)

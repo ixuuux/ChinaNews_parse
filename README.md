@@ -21,10 +21,11 @@
 
 **2018-7-28 19:00**
 
+人民日报
 ![人民日报](http://ww1.sinaimg.cn/large/005WOYz1ly1ftps19akfzj30uk0i2q80.jpg)
-
+新华日报
 ![新华日报](http://ww1.sinaimg.cn/large/005WOYz1ly1ftps24h4ibj30uk0i2q8p.jpg)
-
+中国日报
 ![中国日报](http://ww1.sinaimg.cn/large/005WOYz1ly1ftps2gb2wmj30uk0i2q7h.jpg)
-
+光明日报
 ![光明日报](http://ww1.sinaimg.cn/large/005WOYz1ly1ftps2wc8zpj30uk0i2afq.jpg)

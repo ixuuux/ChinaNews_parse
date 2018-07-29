@@ -83,6 +83,8 @@ class RenminRibao(GetHtml, WordClouds):  # 人民日报
                         yield "".join(etr.xpath('//div[@id="ozoom"]//p//text()'))
         except IndexError as e:
             print("人民日报", e)
+        except:
+            pass
 
     def save(self, info):  # 保存
         with open("{}.txt".format(self.name), "a", encoding="utf-8") as f:
@@ -130,6 +132,8 @@ class XinhuaRibao(GetHtml, WordClouds):  # 新华日报
                         yield "".join(el.xpath('//div[@id="ozoom"]//p//text()'))
         except IndexError as e:
             print("新华日报", e)
+        except:
+            pass
 
     def save(self, info):
         with open("{}.txt".format(self.name), "a", encoding="utf-8") as f:
@@ -216,6 +220,8 @@ class GMDaily(GetHtml, WordClouds):  # 光明日报
                         yield ii
         except IndexError as e:
             print("光明日报", e)
+        except:
+            pass
 
     def get_doc(self, url):  # 获取新闻正文
         html = self.get_one_page(url, headers=self.headers)

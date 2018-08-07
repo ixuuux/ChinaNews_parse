@@ -9,9 +9,7 @@ from wordcloud import WordCloud
 max_req = 3  # 最大重试次数
 
 class GetHtml(object):  # 专职发送请求
-    
     num = 0
-    
     def get_one_page(self, url, headers, timeout=3):
         if self.num < max_req:
             try:
@@ -32,7 +30,6 @@ class GetHtml(object):  # 专职发送请求
 
 
 class WordClouds(object):  # 做词云图
-    
     def wordc(self, file_name, font_path="msyh.ttc"):
         with open("{}.txt".format(file_name), encoding="utf-8") as f:
             seg_list = jieba.cut(f.read(), cut_all=False)  # 使用jieba分词
@@ -52,7 +49,6 @@ class WordClouds(object):  # 做词云图
 
 
 class RenminRibao(GetHtml, WordClouds):  # 人民日报
-    
     def __init__(self):
         self.url = "http://paper.people.com.cn/rmrb/html/{}/nbs.D110000renmrb_01.htm".format(time.strftime("%Y-%m/%d"))
         self.headers = {
@@ -102,7 +98,6 @@ class RenminRibao(GetHtml, WordClouds):  # 人民日报
 
 
 class XinhuaRibao(GetHtml, WordClouds):  # 新华日报
-    
     def __init__(self):
         # http://xh.xhby.net/mp3/pc/layout/201807/25/l1.html
         # self.url = "http://paper.people.com.cn/rmrb/html/{}/nbs.D110000renmrb_01.htm".format(time.strftime("%Y-%m/%d"))
@@ -151,7 +146,6 @@ class XinhuaRibao(GetHtml, WordClouds):  # 新华日报
 
 
 class ChinaDaily(GetHtml, WordClouds):  # 中国日报，海外
-    
     def __init__(self):
         self.url = "http://www.chinadaily.com.cn/china/governmentandpolicy"
         self.headers = {
@@ -196,7 +190,6 @@ class ChinaDaily(GetHtml, WordClouds):  # 中国日报，海外
 
 
 class GMDaily(GetHtml, WordClouds):  # 光明日报
-    
     def __init__(self):
         self.url = "http://www.gmw.cn/"
         self.headers = {

@@ -10,7 +10,7 @@ max_req = 3  # 最大重试次数
 
 class GetHtml(object):  # 专职发送请求
     num = 0
-    def get_one_page(self, url, headers, timeout=3):
+    def get_one_page(self, url, headers, timeout=5):
         if self.num < max_req:
             try:
                 response = requests.get(url=url, headers=headers, timeout=timeout)
@@ -21,12 +21,12 @@ class GetHtml(object):  # 专职发送请求
                 print("Time Out", url)
                 self.num += 1
                 time.sleep(self.num+1)
-                return self.get_one_page(url=url, headers=headers, timeout=timeout + 3)
+                return self.get_one_page(url=url, headers=headers, timeout=timeout + self.num * 3)
             except Exception as e:
                 print(e, url)
                 self.num += 1
                 time.sleep(self.num+1)
-                return self.get_one_page(url=url, headers=headers, timeout=timeout + 3)
+                return self.get_one_page(url=url, headers=headers, timeout=timeout + self.num * 3)
 
 
 class WordClouds(object):  # 做词云图
@@ -240,18 +240,73 @@ class GMDaily(GetHtml, WordClouds):  # 光明日报
         print("光明日报完成，用时：", e-s)
 
 
+class ChinaGov(GetHtml, WordClouds):  # 中国政府网，首页 > 新闻 > 要闻
+    def __init__(self):
+        self.url = "http://www.gov.cn/xinwen/yaowen.htm"
+        self.headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                          "Chrome/67.0.3396.62 Safari/537.36"
+        }
+        self.name = "中国政府网"
+
+    def get_html(self):
+        return self.get_one_page(url=self.url, headers=self.headers, timeout=8)
+
+    def parse(self, html):
+        try:
+            ele = etree.HTML(html)
+            blo = ele.xpath('//div[@class="news_box"]//ul//li')
+            for i in blo:
+                lists = i.xpath('.//h4/a/@href')
+                for ii in lists:
+                    if i.xpath('.//h4/span/text()')[0].strip()[-2:] == time.strftime('%d'):
+                        if ii[:4] == 'http':
+                            yield ii
+                        else:
+                            yield 'http://www.gov.cn'+ii
+        except IndexError as e:
+            print("中国政府网", e)
+        except Exception as r:
+            print('中国政府网', r)
+
+    def get_doc(self, url):
+        html = self.get_one_page(url, headers=self.headers).content.decode()
+        ele = etree.HTML(html)
+        doc = ele.xpath('//div[@class="pages_content"]//p//text()')
+        return ''.join([i.strip() for i in doc if i])
+
+    def save(self, info):
+        with open("{}.txt".format(self.name), "a", encoding="utf-8") as f:
+            f.write(info)
+            f.write("\n")
+
+    def run(self):
+        s = time.time()
+        html = self.get_one_page(url=self.url, headers=self.headers, timeout=8).text
+        for url in self.parse(html):
+            info = self.get_doc(url)
+            self.save(info)
+        self.wordc(self.name)
+        e = time.time()
+        print("中国政府网完成，用时：", e - s)
+        
+
 if __name__ == '__main__':
     s = time.time()
     renminribao = RenminRibao()
     xinhuaribao = XinhuaRibao()
     chinadaily = ChinaDaily()
+    gmdaily = GMDaily()
+    chinagov = ChinaGov()
     t1 = td.Thread(target=renminribao.run)
     t2 = td.Thread(target=xinhuaribao.run)
     t3 = td.Thread(target=chinadaily.run)
     t4 = td.Thread(target=gmdaily.run)
+    t5 = td.Thread(target=chinagov.run)
     t1.start()
     t2.start()
     t3.start()
     t4.start()
+    t5.start()
     e = time.time()
     print("用时：", e-s)

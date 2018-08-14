@@ -1,6 +1,6 @@
 # ✌学习✌中央级官媒新闻内容
 
-> 数据来源：人民日报(每版的“要闻”)，新华日报(每版的“要闻/重要新闻”)，中国日报(海外)，光明日报…(还可以添加更多来源)
+> 数据来源：人民日报(每版的“要闻”)，新华日报(每版的“要闻/重要新闻”)，中国日报(海外)，光明日报，中国政府网(首页>新闻>要闻)…(还可以添加更多来源)
 
 抓来干什么？目前是以分析词频做词云图，或许可以一定程度上反映主旋律的调子是什么
 
@@ -83,14 +83,22 @@
 ●	[中国日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu72i9nj9dj30uk0i278w.jpg)
 ●	[光明日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu72ihhr2lj30uk0i279w.jpg)  
 ### 2018-8-13 19:00  
+●	[人民日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu89zbwv7yj30uk0i2gr1.jpg)
+●	[新华日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu8a0j962rj30uk0i2djw.jpg)
+●	[中国日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu8a0kygqaj30uk0i2aej.jpg)
+●	[光明日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu8a0v20eoj30uk0i2aej.jpg)  
+### 2018-8-14 17:25  
 人民日报  
-![人民日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu89zbwv7yj30uk0i2gr1.jpg)  
+![人民日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu9d63cu7oj30uk0i2n2x.jpg)  
 
 新华日报  
-![新华日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu8a0j962rj30uk0i2djw.jpg)  
+![新华日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu9d65rea5j30uk0i2dkq.jpg)  
 
 中国日报  
-![中国日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu8a0kygqaj30uk0i2aej.jpg)  
+![中国日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu9d6h5jgej30uk0i20x5.jpg)  
 
 光明日报  
-![光明日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu8a0v20eoj30uk0i2aej.jpg) 
+![光明日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fu9d6jaiqdj30uk0i20wu.jpg)  
+
+中国政府网
+![中国政府网](http://ww1.sinaimg.cn/large/005WOYz1ly1fu9d6r96mvj30uk0i2tdj.jpg)  

@@ -130,19 +130,26 @@
 ●	[光明日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fuhn0pp6hlj30uk0i2q85.jpg)
 ●	[中国政府网](http://ww1.sinaimg.cn/large/005WOYz1ly1fuhn0r8fejj30uk0i2jw0.jpg)  
 ### 2018-8-22 22:00  
+●	[人民日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fuittislrtj30uk0i243s.jpg)
+●	[新华日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fuittl44qmj30uk0i2jva.jpg)
+●	[中国日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fuittsfj60j30uk0i2gps.jpg)
+●	[光明日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fuittvbmtaj30uk0i2jvy.jpg)
+●	[中国政府网](http://ww1.sinaimg.cn/large/005WOYz1ly1fuitu34rtnj30uk0i2q7u.jpg)  
+
+~~暂停更新，恢复待定~~，2018-10-22恢复更新
+
+### 2018-10-22 11:00  
 人民日报  
-![人民日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fuittislrtj30uk0i243s.jpg)  
+![人民日报](http://ww1.sinaimg.cn/large/007fldCely1fwgtnj0yu8j30uk0i2afg.jpg)  
 
 新华日报  
-![新华日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fuittl44qmj30uk0i2jva.jpg)  
+![新华日报](http://ww1.sinaimg.cn/large/007fldCely1fwgtnw3wi3j30uk0i243b.jpg)  
 
 中国日报  
-![中国日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fuittsfj60j30uk0i2gps.jpg)  
+![中国日报](http://ww1.sinaimg.cn/large/007fldCely1fwgto33cc4j30uk0i2q7p.jpg)  
 
 光明日报  
-![光明日报](http://ww1.sinaimg.cn/large/005WOYz1ly1fuittvbmtaj30uk0i2jvy.jpg)  
+![光明日报](http://ww1.sinaimg.cn/large/007fldCely1fwgto7lgcoj30uk0i2wjd.jpg)  
 
 中国政府网  
-![中国政府网](http://ww1.sinaimg.cn/large/005WOYz1ly1fuitu34rtnj30uk0i2q7u.jpg)  
-
-暂停更新，恢复待定
+![中国政府网](http://ww1.sinaimg.cn/large/007fldCely1fwgtoh5brsj30uk0i2tda.jpg)  

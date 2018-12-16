@@ -87,10 +87,6 @@ class BaseClass(GetHtml):
             a = word_coulds.generate(a)
             a.to_file(".\\{}\\{}.jpg".format(DIR_NAME, file_name))
 
-    def __del__(self):
-        print(os.getcwd())
-
-
 class RenminRibao(BaseClass):  # 人民日报
     def __init__(self):
         url = "http://paper.people.com.cn/rmrb/html/{}/nbs.D110000renmrb_01.htm".format(time.strftime("%Y-%m/%d"))
@@ -267,3 +263,4 @@ if __name__ == '__main__':
     td.Thread(target=gmdaily.run).start()
     td.Thread(target=chinagov.run).start()
     print("用时：", time.time() - s)
+    os.startfile(DIR_NAME)
